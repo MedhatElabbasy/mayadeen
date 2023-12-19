@@ -26,3 +26,10 @@ Route::get('/', function () {
 });
 
 Route::get('/{page}', [AdminDashboardController::class,'index']);
+##AdminDashboard
+Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.'], function () {
+
+    Route::get('/story', function () {
+        return view('dashboard.story.index');
+    })->name('story');
+});
