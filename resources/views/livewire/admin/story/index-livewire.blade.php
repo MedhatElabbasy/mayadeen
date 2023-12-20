@@ -81,6 +81,9 @@
             </div>
         @endforelse
     </div>
+    <div class="text-center p-2">
+        {{ $stories->links('dashboard.layouts.pagination') }}
+    </div>
     {{-- insert model --}}
     <div wire:ignore.self class="modal fade" id="storyModal" tabindex="-1" aria-labelledby="storyModalLabel"
         aria-hidden="true">
