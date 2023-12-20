@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dshboard\AdminDashboardController;
+use App\Http\Controllers\Dashboar\Admin\Historical_writers\ShowHistorical_writerController;
+
 use App\Http\Controllers\Dashboar\Admin\Story\ShowStoryController;
 
 /*
@@ -33,6 +35,12 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.'], functio
     Route::get('/story', function () {
         return view('dashboard.story.index');
     })->name('story');
-
+    
     Route::get('show-story/{id}',[ShowStoryController::class,'index'])->name('show-story');
+
+    Route::get('/HistoricalWriter', function () {
+        return view('dashboard.HistoricalWriter.index');
+    })->name('HistoricalWriter');
+    Route::get('show-HistoricalWriter/{id}',[ShowHistorical_writerController::class,'index'])->name('show-story');
+
 });
