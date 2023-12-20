@@ -1,10 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dshboard\AdminDashboardController;
 use App\Http\Controllers\Dashboar\Admin\Historical_writers\ShowHistorical_writerController;
 
 use App\Http\Controllers\Dashboar\Admin\Story\ShowStoryController;
+use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControler;
+use App\Http\Controllers\Dashboard\Admin\AdminDashboardController as AdminAdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,20 +21,23 @@ use App\Http\Controllers\Dashboar\Admin\Story\ShowStoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
+Auth::routes(['register' => false]);
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
-Route::get('/', function () {
-    return view('dashboard.index');
-});
-
-Route::get('/{page}', [AdminDashboardController::class,'index']);
+Route::get('/{page}', [AdminAdminDashboardController::class,'index']);
 ##AdminDashboard
-Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.'], function () {
-
+Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middleware' => ['auth']], function () {
+    Route::get('/', function () {
+        return view('dashboard.index');
+    })->name('index');
+##story
     Route::get('/story', function () {
         return view('dashboard.story.index');
     })->name('story');
@@ -42,5 +48,11 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.'], functio
         return view('dashboard.HistoricalWriter.index');
     })->name('HistoricalWriter');
     Route::get('show-HistoricalWriter/{id}',[ShowHistorical_writerController::class,'index'])->name('show-story');
+    ##writers history
+    Route::get('/writers', function () {
+        return view('dashboard.writershistory.index');
+    })->name('writers');
+
+    Route::get('show-writer/{id}',[ShowWriterHistoryControler::class,'index'])->name('show-writer');
 
 });

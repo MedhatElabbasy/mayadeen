@@ -4,10 +4,10 @@ namespace App\Livewire\Admin\Story;
 
 use App\Models\Story;
 use Livewire\Component;
-
+use WithPagination;
 class IndexLivewire extends Component
 {
-
+    protected $paginationTheme = 'bootstrap';
     public $title, $description, $content, $modelId;
 
     ################
