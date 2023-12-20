@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Admin\AdminDashboardController as AdminAdminDashboardController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dshboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\Admin\Story\ShowStoryController;
 use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControler;
+use App\Http\Controllers\Dashboard\Admin\AdminDashboardController as AdminAdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +19,22 @@ use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControl
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
+Auth::routes(['register' => false]);
 
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('dashboard.index');
-});
+
 
 Route::get('/{page}', [AdminAdminDashboardController::class,'index']);
 ##AdminDashboard
-Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.'], function () {
+Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middleware' => ['auth']], function () {
+    Route::get('/', function () {
+        return view('dashboard.index');
+    })->name('index');
 ##story
     Route::get('/story', function () {
         return view('dashboard.story.index');
