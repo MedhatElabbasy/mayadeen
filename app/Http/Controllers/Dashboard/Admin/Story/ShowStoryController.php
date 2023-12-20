@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Dashboar\Admin\Story;
+namespace App\Http\Controllers\Dashboard\Admin\Story;
 
-use App\Http\Controllers\Controller;
 use App\Models\Story;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ShowStoryController extends Controller
 {
@@ -11,7 +12,7 @@ class ShowStoryController extends Controller
     {
         $story = Story::find($id);
         if (!$story) {
-            abort(404); 
+            abort(404);
         }
 
         return view('dashboard.story.show', compact('story'));

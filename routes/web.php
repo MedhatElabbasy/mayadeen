@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Admin\AdminDashboardController as AdminAdminDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dshboard\AdminDashboardController;
-use App\Http\Controllers\Dashboar\Admin\Story\ShowStoryController;
+use App\Http\Controllers\Dashboard\Admin\Story\ShowStoryController;
 use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControler;
 
 /*
@@ -27,7 +28,7 @@ Route::get('/', function () {
     return view('dashboard.index');
 });
 
-Route::get('/{page}', [AdminDashboardController::class,'index']);
+Route::get('/{page}', [AdminAdminDashboardController::class,'index']);
 ##AdminDashboard
 Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.'], function () {
 ##story
