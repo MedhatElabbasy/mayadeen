@@ -2,7 +2,7 @@
 @section('css')
 <link href="{{URL::asset('assets/plugins/morris.js/morris.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
-
+{{--
 <style>
     .card-text {
       overflow: hidden;
@@ -31,7 +31,7 @@
     cursor: pointer;
     color: #007bff; /* Change the color to your desired hover color */
 }
-  </style>
+  </style> --}}
 @endsection
 @section('title','الأقصوصة')
 @section('page-header')
@@ -46,25 +46,38 @@
 @endsection
 @section('content')
 
-@livewire('admin.story.index-livewire')
+
+<div class="row">
+        <div class="col-12 col-sm-12 col-lg-12 col-xl-12">
+            <div class="card card-primary">
+                <div class="card-header pb-0">
+                    <span class="badge badge-primary rounded-pill">{{ $story->id }}</span>
+                    <h3 class="card-title mb-0 pb-0 text-center">{{ $story->title }}</h3>
+                </div>
+
+                <div class="card-body">
+                    <strong class="label">الوصف:</strong>
+                    {{ $story->description }}
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        <strong class="label">المحتوى:</strong>
+                        {{ $story->content }}
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+</div>
+
+
+{{-- //// --}}
             </div>
         </div>
 @endsection
 @section('js')
-<script>
-    function toggleDescription() {
-      var description = document.querySelector('.card-text');
-      description.style.webkitLineClamp = description.style.webkitLineClamp === '2' ? 'unset' : '2';
-    }
-  </script>
 
-
-<script>
-    window.addEventListener('close-modal', event => {
-
-        $('#storyModal').modal('hide');
-        $('#updateStoryModal').modal('hide');
-        $('#deleteStoryModal').modal('hide');
-    })
-</script>
 @endsection

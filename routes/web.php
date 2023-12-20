@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Dshboard\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dshboard\AdminDashboardController;
+use App\Http\Controllers\Dashboar\Admin\Story\ShowStoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,6 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.'], functio
     Route::get('/story', function () {
         return view('dashboard.story.index');
     })->name('story');
+
+    Route::get('show-story/{id}',[ShowStoryController::class,'index'])->name('show-story');
 });

@@ -8,14 +8,13 @@ use Livewire\Component;
 class IndexLivewire extends Component
 {
 
-    public $title, $description, $content;
+    public $title, $description, $content, $modelId;
 
     ################
 
     public function amount()
     {
         $this->resetPage();
-        
 
     }
     ################
@@ -24,12 +23,13 @@ class IndexLivewire extends Component
     {
         return [
             'title' => ['required'],
+            'description' => ['required'],
             'content' => ['required'],
         ];
     }
     protected $messages = [
         'title.required' => 'حقل العنوان مطلوب.',
-        // 'discription.required' => 'حقل الوصف مطلوب.',
+        'description.required' => 'حقل الوصف مطلوب.',
         'content.required' => 'حقل المحتوى مطلوب.',
     ];
     ################
@@ -43,6 +43,7 @@ class IndexLivewire extends Component
         $this->title = null;
         $this->description = null;
         $this->content = null;
+        $this->modelId = null;
     }
 
     ##################
@@ -59,14 +60,52 @@ class IndexLivewire extends Component
         session()->flash('message', 'تم اضافة الاقصوصة بنجاح');
     }
     ##################
-    public function deleteStory($storyId)
+    public function updated($fields)
     {
-        $story = Story::findOrFail($storyId);
-        $story->delete();
+        $this->validateOnly($fields);
+    }
+    ##################   Update Story
+    public function editStory(int $storyId)
+    {
+        $story = Story::find($storyId);
+        if ($story) {
 
-        session()->flash('message', 'تم حذف الاقصوصة بنجاح');
+            $this->modelId = $storyId;
+            $this->title = $story->title;
+            $this->description = $story->description;
+            $this->content = $story->content;
+        } else {
+            // return redirect()->to('/livewire.admin.main-category-livewire');
+        }
     }
     ##################
+    public function updateStory()
+    {
+        $validatedData = $this->validate();
+        Story::where('id', $this->modelId)->update([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'content' => $validatedData['content'],
+        ]);
+        session()->flash('message', 'تم تعيل الأقصوصة بنجاح ');
+        $this->resetVars();
+        $this->dispatch('close-modal');
+    }
+
+    ##################  Dlete Story
+    public function getDeleteStory(int $storyId)
+    {
+        $this->modelId = $storyId;
+    }
+
+    public function deleteStory()
+    {
+        Story::find($this->modelId)->delete();
+        session()->flash('message', 'تم حذف الأقصوصة بنجاح ');
+        $this->dispatch('close-modal');
+        $this->resetVars();
+    }
+    ##################  Render
     public function render()
     {
         $stories = Story::orderBy('id', 'DESC')->paginate(10);

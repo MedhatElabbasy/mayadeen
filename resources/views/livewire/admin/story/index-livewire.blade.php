@@ -56,17 +56,18 @@
 
                     <div class="card-footer">
                         <div class="row justify-content-center">
-                            <span wire:click="showStory({{ $story->id }})" class="icon col-4 text-center hover"><i
-                                    class="fas fa-eye fa-lg"></i></span>
-                            {{-- <span wire:click="editStory({{ $story->id }})" class="icon col-4 text-center hover"><i
-                                    class="fas fa-edit fa-lg"></i></span> --}}
+                            <a href="{{ route('admin.dashboard.show-story',$story->id) }}">
+                                <span  class="icon col-4 text-center hover"><i
+                                    class="fas fa-eye fa-lg"></i></span></a>
+
+
 
                             <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#updateCatModal" wire:click="editCat({{ $story->id }})">
+                                data-bs-target="#updateStoryModal" wire:click="editStory({{ $story->id }})">
                                 <i class="las la-pen"></i>
                             </a>
 
-                            <a href="" data-bs-toggle="modal" data-bs-target="#deleteCatModal">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#deleteStoryModal"  wire:click="getDeleteStory({{ $story->id }})">
                                 <span class="icon col-4 text-center hover   text-danger"><i
                                         class="fas fa-trash-alt fa-lg"></i></span>
                             </a>
@@ -127,28 +128,70 @@
 
     {{-- end insert model --}}
     {{-- update  model --}}
-
-
-    {{-- end  update  model --}}
-
-    {{-- delete model --}}
-    <div wire:ignore.self class="modal fade" id="deleteCatModal" tabindex="-1" aria-labelledby="deleteMcatModalLabel"
+    <div wire:ignore.self class="modal fade" id="updateStoryModal" tabindex="-1" aria-labelledby="updateStoryModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title">Delete Category</h6><button wire:click="closeModal" aria-label="Close"
+                    <h6 class="modal-title"> تعديل اقصوصة </h6><button wire:click="closeModal" aria-label="Close"
                         class="close" data-bs-dismiss="modal" type="button"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
-                <form wire:submit.prevent="destroyCat">
+                <form wire:submit.prevent="updateStory">
                     <div class="modal-body">
-                        <h4>?Are you sure you want to delete this data </h4>
+                        <div class="mb-3">
+                            <label> العنوان</label>
+                            <input type="text" wire:model="title" class="form-control">
+                            @error('title')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label>الوصف </label>
+                            <textarea wire:model="description" class="form-control" rows="2"></textarea>
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label>المحتوي </label>
+                            <textarea wire:model="content" class="form-control" rows="5"></textarea>
+                            @error('content')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Yes! Delete</button>
-                        <button type="button" class="btn btn-secondary" wire:click="closeModal"
-                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" wire:click="updateStory">حفظ</button>
+                        <button type="button" class="btn btn-danger" wire:click="closeModal"
+                            data-bs-dismiss="modal">الغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{-- end  update  model --}}
+
+    {{-- delete model --}}
+    <div wire:ignore.self class="modal fade" id="deleteStoryModal" tabindex="-1"
+        aria-labelledby="deleteStoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">حذف الأقصوصة </h6><button wire:click="closeModal" aria-label="Close"
+                        class="close" data-bs-dismiss="modal" type="button"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <form wire:submit.prevent="deleteStory">
+                    <div class="modal-body">
+                        <h4>هل انت متآكد من عملية الحذف</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">! حذف</button>
+                        <button type="button" class="btn btn-danger" wire:click="closeModal"
+                            data-bs-dismiss="modal">الغاء</button>
 
                     </div>
                 </form>
