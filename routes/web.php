@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dshboard\AdminDashboardController;
-use App\Http\Controllers\Dashboard\Admin\Story\ShowStoryController;
-use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControler;
 use App\Http\Controllers\Dashboard\Admin\AdminDashboardController as AdminAdminDashboardController;
 use App\Http\Controllers\Dashboard\Admin\History\ShowHistoryController;
+use App\Http\Controllers\Dashboard\Admin\Story\ShowStoryController;
+use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControler;
+use App\Http\Controllers\Dshboard\AdminDashboardController;
+use App\Http\Controllers\website\SurveyController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 /*
 historical-writer
 |--------------------------------------------------------------------------
@@ -72,4 +73,12 @@ Route::group(  ['prefix' => 'superVisor','as'=>'superVisor.','middleware' => ['a
     Route::get('/title',function(){
         return view('super_visor.story.title');
     })->name('title');
+});
+
+Route::group(  ['prefix' => 'users','as'=>'users.'], function () {
+    Route::resource('survey', SurveyController::class)->only(['index', 'store']);
+    
+    Route::get('survey/thank-you', function () {
+        return view('website.survey.success');
+    })->name('survey.thank-you');
 });
