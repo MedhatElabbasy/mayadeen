@@ -11,10 +11,11 @@ class HistoricalWriter extends Model
     protected $table = 'historical_writers';
 
     protected $fillable = [
-        'event_name',
+      
         'writer_name',
-        'Name_poem',
-        'audio_file',
+        'writer_img',
+        'About_writer',
        
     ];
 }
+

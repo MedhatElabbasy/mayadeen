@@ -3,13 +3,12 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dshboard\AdminDashboardController;
-use App\Http\Controllers\Dashboar\Admin\Historical_writers\ShowHistorical_writerController;
-
-use App\Http\Controllers\Dashboar\Admin\Story\ShowStoryController;
+use App\Http\Controllers\Dashboard\Admin\Story\ShowStoryController;
 use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControler;
 use App\Http\Controllers\Dashboard\Admin\AdminDashboardController as AdminAdminDashboardController;
-
+use App\Http\Controllers\Dashboard\Admin\History\ShowHistoryController;
 /*
+historical-writer
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -43,11 +42,13 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middlewa
     })->name('story');
     
     Route::get('show-story/{id}',[ShowStoryController::class,'index'])->name('show-story');
-
+##################### أدباء عبر التاريخ#############ShowHistoricalwriterController###########
     Route::get('/HistoricalWriter', function () {
         return view('dashboard.HistoricalWriter.index');
     })->name('HistoricalWriter');
-    Route::get('show-HistoricalWriter/{id}',[ShowHistorical_writerController::class,'index'])->name('show-story');
+
+    Route::get('show-HistoricalWriter/{id}',[ShowHistoryController::class,'index'])->name('show-HistoricalWriter');
+    ##############################
     ##writers history
     Route::get('/writers', function () {
         return view('dashboard.writershistory.index');

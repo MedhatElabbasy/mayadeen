@@ -52,7 +52,7 @@
             <div class="card card-primary">
                 <div class="card-header pb-0">
                     <span class="badge badge-primary rounded-pill">{{ $HistoricalWriter->id }}</span>
-                    <h3 class="card-title mb-0 pb-0 text-center">{{ $HistoricalWriter->title }}</h3>
+                    <h3 class="card-title mb-0 pb-0 text-center">{{ $HistoricalWriter->writer_name }}</h3>
                 </div>
 
              
@@ -61,16 +61,13 @@
                   {{ $HistoricalWriter->writer_name }}
               </div>
               <div class="card-body">
-                  <strong class="label">اسم القصيده:</strong>
-                  {{ $HistoricalWriter->Name_poem }}
+                  <strong class="label">نبذه عن الكاتب :</strong>
+                  {{ $HistoricalWriter->About_writer }}
               </div>
               <div class="card-body">
-                  <strong class="label">القصيده :</strong>
-                  <audio controls class="mt-3">
-                      <source src="{{ asset($HistoricalWriter->audio_file) }}" type="audio/mp3">
-                      {{$HistoricalWriter->audio_file}}
-                  </audio>
-              </div>
+                    <strong class="label">صورة الكاتب:</strong>
+                    <img src="{{ asset($HistoricalWriter->image_path) }}" alt="Writer Image" class="img-fluid">
+                </div>
 
 
             </div>
