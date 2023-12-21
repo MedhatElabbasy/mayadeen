@@ -18,20 +18,20 @@ use App\Http\Controllers\Dashboard\Admin\AdminDashboardController as AdminAdminD
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+
 
 Auth::routes(['register' => false]);
 
-
+Route::get('/', function () {
+    return view('dashboard.signin');
+})->name('defult.login');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
 Route::get('/{page}', [AdminAdminDashboardController::class,'index']);
-##AdminDashboard
-Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middleware' => ['auth']], function () {
+#################################################################AdminDashboard###########################################################
+Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middleware' => ['auth','role:admin']], function () {
     Route::get('/', function () {
         return view('dashboard.index');
     })->name('index');
@@ -50,4 +50,18 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middlewa
 
     Route::get('show-writer/{id}',[ShowWriterHistoryControler::class,'index'])->name('show-writer');
 
+});
+
+
+#################################################################superVisor ###########################################################
+
+
+Route::group(  ['prefix' => 'superVisor','as'=>'superVisor.','middleware' => ['auth','role:supervisor']], function () {
+    Route::get('/supervisor', function () {
+        return view('super_visor.index');
+    })->name('index');
+
+    Route::get('/title',function(){
+        return view('super_visor.story.title');
+    })->name('title');
 });
