@@ -13,9 +13,24 @@ return new class extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
-            $table->char('title');
+            $table->char('title')->nullable();
             $table->string('description')->nullable();
-            $table->longText('content');
+            $table->longText('content')->nullable();
+
+
+            $table->string('w1_name')->nullable();
+            $table->string('w1_number')->nullable();
+            $table->string('w1_email')->nullable()->unique();
+
+            $table->string('w2_name')->nullable();
+            $table->string('w2_number')->nullable();
+            $table->string('w2_email')->nullable()->unique();
+
+            $table->string('w3_name')->nullable();
+            $table->string('w3_number')->nullable();
+            $table->string('w3_email')->nullable()->unique();
+
+
             $table->timestamps();
         });
     }
