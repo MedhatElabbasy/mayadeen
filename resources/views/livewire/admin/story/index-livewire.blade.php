@@ -35,7 +35,7 @@
 
     <div class="row">
         @forelse ($stories as $story)
-            <div class="col-12 col-sm-6 col-lg-6 col-xl-6">
+                <div class="col-12 col-sm-6 col-lg-3 col-xl-3">
                 <div class="card card-primary">
                     <div class="card-header pb-0">
                         <span class="badge badge-primary rounded-pill">{{ $story->id }}</span>
