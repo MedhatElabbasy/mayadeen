@@ -56,6 +56,13 @@
 
                     <div class="card-footer">
                         <div class="row justify-content-center">
+
+
+                            <a href="{{ route('admin.dashboard.story-download-pdf', $story->id) }}" class="btn btn-sm btn-success">
+                                <i class="fas fa-download"></i> تحميل  PDF
+                            </a>
+
+
                             <a href="{{ route('admin.dashboard.show-story',$story->id) }}">
                                 <span  class="icon col-4 text-center hover"><i
                                     class="fas fa-eye fa-lg"></i></span></a>

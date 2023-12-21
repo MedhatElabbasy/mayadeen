@@ -35,12 +35,14 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middlewa
     Route::get('/', function () {
         return view('dashboard.index');
     })->name('index');
-##story
+    ##story
     Route::get('/story', function () {
         return view('dashboard.story.index');
     })->name('story');
 
     Route::get('show-story/{id}',[ShowStoryController::class,'index'])->name('show-story');
+    // dowload story pdf
+    Route::get('/download-pdf/{id}', [ShowStoryController::class, 'downloadPDF'])->name('story-download-pdf');
     ##writers history
     Route::get('/writers', function () {
         return view('dashboard.writershistory.index');
