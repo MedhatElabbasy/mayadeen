@@ -6,8 +6,9 @@ use App\Http\Controllers\Dshboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\Admin\Story\ShowStoryController;
 use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControler;
 use App\Http\Controllers\Dashboard\Admin\AdminDashboardController as AdminAdminDashboardController;
-
+use App\Http\Controllers\Dashboard\Admin\History\ShowHistoryController;
 /*
+historical-writer
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -43,6 +44,13 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middlewa
     Route::get('show-story/{id}',[ShowStoryController::class,'index'])->name('show-story');
     // dowload story pdf
     Route::get('/download-pdf/{id}', [ShowStoryController::class, 'downloadPDF'])->name('story-download-pdf');
+##################### أدباء عبر التاريخ#############ShowHistoricalwriterController###########
+    Route::get('/HistoricalWriter', function () {
+        return view('dashboard.HistoricalWriter.index');
+    })->name('HistoricalWriter');
+
+    Route::get('show-HistoricalWriter/{id}',[ShowHistoryController::class,'index'])->name('show-HistoricalWriter');
+    ##############################
     ##writers history
     Route::get('/writers', function () {
         return view('dashboard.writershistory.index');

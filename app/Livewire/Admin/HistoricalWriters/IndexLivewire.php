@@ -1,45 +1,39 @@
 <?php
 
-namespace App\Livewire\Admin\HistoricalWriters;
+namespace App\Livewire\Admin\historicalwriters;
 use App\Models\HistoricalWriter;
 use Livewire\Component;
-
+use Livewire\WithFileUploads; 
 class IndexLivewire extends Component
-{
 
-
-    public $event_name, $writer_name,  $Name_poem, $audio_file;
-
+{  use WithFileUploads; 
+    public  $writer_name,  $writer_img, $About_writer, $modelId;
 
     public function amount()
     {
         $this->resetPage();
+
+    }
+
+
+    public function rules(){
         
 
-    }
 
-    #it nesscray to make pagnation 
-
-    public function rules()
-    {
         return [
-            'event_name' => ['required'],
             'writer_name' => ['required'],
-            'Name_poem' => ['required'],
-            'audio_file' => ['required'],
-           
+            'writer_img' => ['required', 'file', 'image', 'max:10240'], 
+            'About_writer' => ['required'],
         ];
+        
     }
-
     protected $messages = [
-        'event_name.required' => 'حقل العنوان مطلوب.',
-        'writer_name.required' => 'حقل المحتوى مطلوب.',
-        'Name_poem.required' => 'حقل المحتوى مطلوب.',
-        'audio_file.required' => 'حقل المحتوى مطلوب.',
+        'writer_name.required' => 'حقل العنوان مطلوب.',
+        'writer_img.required' => 'حقل المحتوى مطلوب.',
+        'About_writer.required' => 'حقل المحتوى مطلوب.',
        
     ];
 
-#need to know !!!!!!!!!!!!
     public function closeModal()
     {
         $this->resetVars();
@@ -47,44 +41,127 @@ class IndexLivewire extends Component
 
     public function resetVars()
     {
-        $this->event_name = null;
         $this->writer_name = null;
-        $this->Name_poem = null;
-        $this->audio_file = null;
-       
+        $this->writer_img = null;
+        $this->About_writer = null;
     }
-#########complet to know why!!  Name_poem
 
-public function saveHistoricalWriter()
-{
-    $this->validate();
-    $HistoricalWriter = new HistoricalWriter();
-    $HistoricalWriter->event_name = $this->event_name;
-     $HistoricalWriter->writer_name = $this->writer_name;
-     $HistoricalWriter->Name_poem = $this->Name_poem;
-     $HistoricalWriter->audio_file = $this->audio_file;
-    $HistoricalWriter->save();
-    $this->dispatch('close-modal');
-    $this->resetVars();
+
+ public function saveHistoricalWriter()
+ {
+
+    $this->validate([
+        'writer_name' => ['required'],
+        'writer_img' => ['required', 'image', 'max:10240'],
+        'About_writer' => ['required'],
+    ]);
+ 
+
+  
+
+
+    $this->writer_img = $this->writer_img->store('images');
+    HistoricalWriter::create([
+        'writer_name' => $this->writer_name,
+        'writer_img' => $this->writer_img,
+        'About_writer' => $this->About_writer,
+    ]);
+
+    $this->dispatch('closeModal');
+$this->resetVars();
     session()->flash('message', 'تم اضافة الشعر بنجاح');
+
+ }
+ 
+
+ public function updated($fields)
+    {
+        $this->validateOnly($fields);
+    }
+  
+    public function editHistoricalWriter(int $historicalWriterId)
+    {
+       
+        $this->resetVars();
+
+        $historicalWriter = HistoricalWriter::find($historicalWriterId);
+    
+        if ($historicalWriter) {
+            $this->modelId = $historicalWriterId;
+            $this->writer_name = $historicalWriter->writer_name;
+            $this->writer_img = $historicalWriter->writer_img; 
+            $this->About_writer = $historicalWriter->About_writer; 
+        } else {
+            return response()->json(['error' => ' لا يوجد كاتب  '], 404);
+        } 
+
+
+        $this->resetVars();
+        $historicalWriter = HistoricalWriter::find($historicalWriterId);
+
+        if ($historicalWriter) {
+            $this->modelId = $historicalWriterId;
+            $this->writer_name = $historicalWriter->writer_name;
+            $this->About_writer = $historicalWriter->About_writer;
+        } else {
+            return response()->json(['error' => 'لا يوجد كاتب'], 404);
+        }
+
+    }
+    
+   
+    public function updateHistoricalWriter()
+{
+    $validatedData = $this->validate([
+        'writer_name' => ['required'],
+       'writer_img' => ['required', 'image', 'max:10240'], 
+        'About_writer' => ['required'],
+    ]);
+    $validatedData['writer_img'] = $this->writer_img->store('writer_images', 'public');
+
+    
+    $historicalWriter = HistoricalWriter::find($this->modelId);
+
+    if ($historicalWriter) {
+        // Handle file upload for writer_img
+        $validatedData['writer_img'] = $this->writer_img->store('writer_images', 'public');
+
+        $historicalWriter->update([
+            'writer_name' => $validatedData['writer_name'],
+            'writer_img' => $validatedData['writer_img'],
+            'About_writer' => $validatedData['About_writer'],
+        ]);
+
+        session()->flash('message', 'تم تعديل القصيدة بنجاح');
+        $this->resetVars();
+        $this->dispatch('close-modal');
+    } else {
+     
+        session()->flash('error', 'خطأ: لم يتم العثور على القصيدة');
+    }
 }
 
-public function deleteStory($HistoricalWriterId)
+    
+
+
+public function deleteHistoricalWriter(int $historicalWriterId)
 {
-    $HistoricalWriter = HistoricalWriter::findOrFail($HistoricalWriterId);
+    $HistoricalWriter = HistoricalWriter::findOrFail($historicalWriterId);
     $HistoricalWriter->delete();
 
-    session()->flash('message', 'تم حذف الشعر بنجاح');
+    session()->flash('message', 'تم حذف القصيده بنجاح');
+    $this->resetVars(); 
 }
 
 
-    public function render()
+public function render()
     {
         $HistoricalWriter = HistoricalWriter::orderBy('id', 'DESC')->paginate(10);
-        return view('livewire.index-livewire', [
+        return view('livewire.admin.historicalwriters.index-livewire', [
             'HistoricalWriter' => $HistoricalWriter,
         ]);
 
       
     }
+
 }

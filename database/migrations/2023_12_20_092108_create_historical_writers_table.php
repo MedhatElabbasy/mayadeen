@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('historical_writers', function (Blueprint $table) {
             $table->id();
-            $table->string('event_name');
             $table->string('writer_name');
-            $table->string('Name_poem');
-            $table->string('audio_file');
+            $table->string('writer_img'); 
+            $table->text('About_writer'); 
             $table->timestamps();
         });
     }

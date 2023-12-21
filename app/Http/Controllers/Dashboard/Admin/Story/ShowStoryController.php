@@ -22,6 +22,7 @@ class ShowStoryController extends Controller
         if (!$story) {
             abort(404);
         }
+        
 
         return view('dashboard.story.show', compact('story'));
     }
