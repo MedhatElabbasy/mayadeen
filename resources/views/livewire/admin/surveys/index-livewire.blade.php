@@ -18,7 +18,7 @@
     <div class="row">
         <div class="table-responsive">
             <table class="table table-bordered mb-2">
-                <thead class="text-center">
+                <thead class="thead-dark text-center">
                     <tr>
                         <th class="text-center">#</th>
                         <th class="text-center">الإسم</th>
