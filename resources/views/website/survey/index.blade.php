@@ -29,7 +29,7 @@
             <img src="{{ asset('website/imges/Path 115.svg') }}" alt="" />
 
             <div class="title-container">
-                <div class="img-btn-container">
+                <div class="img-btn-container mt-5">
                     <img class="red-small-btn" src="{{ asset('website/imges/red-small-btn.svg') }}" alt="" />
                     <a href="#" onclick="showQuestions()">
                         <h2>شاركنا تجربتك</h2>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="d-flex justify-content-evenly">
-            <div class="img-btn mt-3">
+            <div class="img-btn mt-3 nextButton d-none">
                 <img src="{{ asset('website/imges/start-btn.svg') }}" alt="" />
                 <button type="button" onclick="nextPrev(1)" id="nextBtn" class="button-form d-none">
                     التالي
@@ -85,8 +85,11 @@
     <script src="{{ asset('website/js/script.js') }}"></script>
     <script>
         function showQuestions(){
+            document.querySelector('.img-btn-container').classList.remove('mt-5');
             document.querySelector('.questions-container').classList.remove('d-none');
             document.querySelector('.button-form').classList.remove('d-none');
+            document.querySelector('.nextButton').classList.remove('d-none');
+            
         }
     </script>
 </body>
