@@ -59,6 +59,10 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middlewa
 
     Route::get('show-writer/{id}',[ShowWriterHistoryControler::class,'index'])->name('show-writer');
 
+    ##survey history
+    Route::get('/surveys', function () {
+        return view('dashboard.surveys.index');
+    })->name('surveys');
 });
 
 
@@ -77,7 +81,7 @@ Route::group(  ['prefix' => 'superVisor','as'=>'superVisor.','middleware' => ['a
 
 Route::group(  ['prefix' => 'users','as'=>'users.'], function () {
     Route::resource('survey', SurveyController::class)->only(['index', 'store']);
-    
+
     Route::get('survey/thank-you', function () {
         return view('website.survey.success');
     })->name('survey.thank-you');
