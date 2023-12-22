@@ -48,9 +48,7 @@
                                 data-bs-original-title="عرض التقييمات">
                                  <i class="fa fa-eye"></i>
                             </a>
-                            <button wire:click="#" class="btn btn-sm btn-danger">
-                                <i class="fa fa-trash"></i>
-                            </button>
+                           
                         </td>
                     </tr>
                     @empty

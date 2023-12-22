@@ -14,91 +14,39 @@
                             <span>ما مدى رضاك عن مرافق المهرجان ؟</span>
                             <div class="imgs-container">
                                 <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/very_suf.svg') }}" alt=""
+                                    <img src="{{ $survey->surveyText($survey->facilities)['img'] }}" alt=""
                                         style="width: 30px;" />
 
-                                    <span class="very_suf">راضي جدا</span>
-                                    <input type="radio" name="facilities" value="verySatified" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/suf.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="suf">راضي </span>
-                                    <input type="radio" name="facilities" value="satified" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/mid.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="mid">محايد </span>
-                                    <input type="radio" name="facilities" value="neutral" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/sad.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="sad"> مستاء</span>
-                                    <input type="radio" name="facilities" value="upset" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/very_sad.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="very_sad"> مستاء جدا</span>
-                                    <input type="radio" name="facilities" value="veryUpset" />
+                                    <span class="very_suf">
+                                        {{ $survey->surveyText($survey->facilities)['text'] }}
+                                    </span>
+
                                 </div>
                             </div>
                         </li>
                         <li>
                             <span>ما مدى رضاك عن تنظيم الفعالية ؟ </span>
-                            <div class="imgs-container">
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/very_suf.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="very_suf">راضي جدا</span>
-                                    <input type="radio" name="organization" value="verySatified" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/suf.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="suf">راضي </span>
-                                    <input type="radio" name="organization" value="satified" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/mid.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="mid">محايد </span>
-                                    <input type="radio" name="organization" value="neutral" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/sad.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="sad"> مستاء</span>
-                                    <input type="radio" name="organization" value="upset" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/very_sad.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="very_sad"> مستاء جدا</span>
-                                    <input type="radio" name="organization" value="veryUpset" />
-                                </div>
+                           <div class="imgs-container">
+                            <div class="img-container">
+                                <img src="{{ $survey->surveyText($survey->organization)['img'] }}" alt="" style="width: 30px;" />
+
+                                <span class="very_suf">
+                                    {{ $survey->surveyText($survey->organization)['text'] }}
+                                </span>
+
                             </div>
+                        </div>
                         </li>
                         <li>
                             <span>ما مدى رضاك عن الفعاليات المقامة ؟ </span>
                             <div class="imgs-container">
                                 <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/very_suf.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="very_suf">راضي جدا</span>
-                                    <input type="radio" name="events" value="verySatified" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/suf.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="suf">راضي </span>
-                                    <input type="radio" name="events" value="satified" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/mid.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="mid">محايد </span>
-                                    <input type="radio" name="events" value="neutral" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/sad.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="sad"> مستاء</span>
-                                    <input type="radio" name="events" value="upset" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/very_sad.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="very_sad"> مستاء جدا</span>
-                                    <input type="radio" name="events" value="veryUpset" />
+                                    <img src="{{ $survey->surveyText($survey->events)['img'] }}" alt="" style="width: 30px;" />
+
+                                    <span class="very_suf">
+                                        {{ $survey->surveyText($survey->events)['text'] }}
+                                    </span>
+
                                 </div>
                             </div>
                         </li>
@@ -106,29 +54,12 @@
                             <span>ما مدى رضاك عن سهولة الوصول للمهرجان ؟</span>
                             <div class="imgs-container">
                                 <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/very_suf.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="very_suf">راضي جدا</span>
-                                    <input type="radio" name="access" value="verySatified" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/suf.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="suf">راضي </span>
-                                    <input type="radio" name="access" value="satified" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/mid.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="mid">محايد </span>
-                                    <input type="radio" name="access" value="neutral" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/sad.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="sad"> مستاء</span>
-                                    <input type="radio" name="access" value="upset" />
-                                </div>
-                                <div class="img-container">
-                                    <img src="{{ asset('website/imges/rating/very_sad.svg') }}" alt=""  style="width: 30px;" />
-                                    <span class="very_sad"> مستاء جدا</span>
-                                    <input type="radio" name="access" value="veryUpset" />
+                                    <img src="{{ $survey->surveyText($survey->access)['img'] }}" alt="" style="width: 30px;" />
+
+                                    <span class="very_suf">
+                                        {{ $survey->surveyText($survey->access)['text'] }}
+                                    </span>
+
                                 </div>
                             </div>
                         </li>
