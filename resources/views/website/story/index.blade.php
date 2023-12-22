@@ -25,7 +25,7 @@
         <h2 class="story-title">الأقصوصه</h2>
         <div class="img-btn">
             <img src="{{ asset('assets/app/story/imges/start-btn.svg') }}" alt="" />
-            <a href="{{ route('superVisor.title') }}">
+            <a href="{{ route('supervisor.story.index') }}">
                 <h2>البدايه</h2>
             </a>
         </div>

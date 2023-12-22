@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\Admin\History\ShowHistoryController;
 use App\Http\Controllers\Dashboard\Admin\Story\ShowStoryController;
 use App\Http\Controllers\Dashboard\Admin\Writershistory\ShowWriterHistoryControler;
 use App\Http\Controllers\Dshboard\AdminDashboardController;
+use App\Http\Controllers\website\StoryController;
 use App\Http\Controllers\website\SurveyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -69,14 +70,15 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middlewa
 #################################################################superVisor ###########################################################
 
 
-Route::group(  ['prefix' => 'superVisor','as'=>'superVisor.','middleware' => ['auth','role:supervisor']], function () {
-    Route::get('/supervisor', function () {
-        return view('super_visor.index');
+Route::group(  ['prefix' => 'supervisor','as'=>'supervisor.','middleware' => ['auth','role:supervisor']], function () {
+    Route::get('start',function(){
+        return view('website.story.index');
     })->name('index');
+    Route::resource('story', StoryController::class)->only(['index', 'store']);
 
-    Route::get('/title',function(){
-        return view('super_visor.story.title');
-    })->name('title');
+    Route::get('story/thank-you', function () {
+        return view('website.survey.success');
+    })->name('story.thank-you');
 });
 
 Route::group(  ['prefix' => 'users','as'=>'users.'], function () {

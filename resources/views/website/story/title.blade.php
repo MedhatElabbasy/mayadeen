@@ -21,12 +21,13 @@
 </head>
 
 <body>
-    <form action="" id="regForm">
+    <form action="{{ route('supervisor.story.store') }}" method="post" id="regForm">
+        @csrf
         <div class="tab container-story-name">
             <div class="story-title-container">
                 <img src="{{ asset('assets/app/story/imges/story-title.svg') }}" alt=""
                     class="story-title-img" />
-                <input type="text" name="story-title" />
+                <input type="text" name="title" />
             </div>
         </div>
 
@@ -36,7 +37,7 @@
                 <div class="input-container">
                     <img class="write-story-img" src="{{ asset('assets/app/story/imges/Path 115.svg') }}"
                         alt="" />
-                    <textarea></textarea>
+                    <textarea name="content"></textarea>
                 </div>
             </div>
         </div>
@@ -45,9 +46,9 @@
             <div class="writers-container">
                 <div class="writer-container">
                     <img src="{{ asset('assets/app/story/imges/first-writer.svg') }}" alt="" />
-                    <input type="text" />
-                    <input type="number" />
-                    <input type="email" />
+                    <input type="text" name="w1_name"/>
+                    <input  type="number" name="w1_number" />
+                    <input type="email" name="w1_email" />
                 </div>
             </div>
         </div>
@@ -55,9 +56,9 @@
             <div class="writers-container">
                 <div class="writer-container">
                     <img src="{{ asset('assets/app/story/imges/second-writer.svg') }}" alt="" />
-                    <input type="text" />
-                    <input type="number" />
-                    <input type="email" />
+                    <input type="text" name="w2_name" />
+                    <input type="number" name="w2_number" />
+                    <input type="email" name="w2_email" />
                 </div>
             </div>
         </div>
@@ -65,9 +66,9 @@
             <div class="writers-container">
                 <div class="writer-container">
                     <img src="{{ asset('assets/app/story/imges/third-writer.svg') }}" alt="" />
-                    <input type="text" />
-                    <input type="number" />
-                    <input type="email" />
+                    <input type="text" name="w3_name" />
+                    <input type="number" name="w3_number" />
+                    <input type="email" name="w3_email" />
                 </div>
             </div>
         </div>

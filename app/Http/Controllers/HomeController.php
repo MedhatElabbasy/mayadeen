@@ -30,9 +30,9 @@ class HomeController extends Controller
                 break;
 
                 case 'supervisor':
-                    return redirect()->route('superVisor.index');
+                    return redirect()->route('supervisor.index');
                     break;
-                    
+
                     case 'defult_user':
                         return redirect()->route('admin.dashboard.index');
                         break;
