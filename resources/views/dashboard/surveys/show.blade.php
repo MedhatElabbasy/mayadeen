@@ -1,115 +1,140 @@
-@extends('dashboard.layouts.master')
-@section('css')
-    <link href="{{ URL::asset('assets/plugins/morris.js/morris.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/jqvmap/jqvmap.min.css') }}" rel="stylesheet">
-    {{--
-<style>
-    .card-text {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* Number of lines to show */
-      -webkit-box-orient: vertical;
-    }
-
-  .label {
-    color: #9685f7; /* Choose your desired color */
-    font-size: 1rem; /* Choose your desired font size */
-    font-weight: bold; /* Make the text bold */
-    margin-right: 5px; /* Add some right margin for spacing */
-  }
-
-  .labe2 {
-    color: #9685f7; /* Choose your desired color */
-    font-size: 1rem; /* Choose your desired font size */
-    font-weight: bold; /* Make the text bold */
-    margin-right: 5px; /* Add some right margin for spacing */
-  }
-
-
-  .icon:hover {
-    cursor: pointer;
-    color: #007bff; /* Change the color to your desired hover color */
-}
-  </style> --}}
-@endsection
-@section('title', 'الأقصوصة')
-@section('page-header')
-    <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between">
-        <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفعاليات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    أقصوصة</span>
+<div class="modal fade text-md-start" id="editsurvey{{$survey->id}}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
+        <div class="modal-content">
+            <div class="modal-header bg-transparent">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-
-    </div>
-    <!-- breadcrumb -->
-@endsection
-@section('content')
-
-
-    <div class="row">
-        <div class="col-12 col-sm-12 col-lg-12 col-xl-12">
-            <div class="card card-primary">
-                <div class="card-header pb-0">
-                    <span class="badge badge-primary rounded-pill">{{ $story->id }}</span>
-                    <h3 class="card-title mb-0 pb-0 text-center">{{ $story->title }}</h3>
+            <div class="modal-body pb-5 px-sm-5 pt-50">
+                <div class="text-center mb-2">
+                    <h1 class="mb-1">عرض التقييمات</h1>
                 </div>
+                <div class="questions-container">
+                    <ul>
+                        <li>
+                            <span>ما مدى رضاك عن مرافق المهرجان ؟</span>
+                            <div class="imgs-container">
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/very_suf.svg') }}" alt=""
+                                        style="width: 30px;" />
 
-                <div class="card-body">
-                    <strong class="label">الوصف:</strong>
-                    {{ $story->description }}
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <strong class="label">المحتوى:</strong>
-                        {{ $story->content }}
-                    </div>
-                </div>
-
-
-                <div class="card-body">
-                    {{-- <div class="card-text row ">
-                        <div class="col-4">
-                            <div class="text-center">
-                                <strong class="label ">الكاتب  الأول :</strong>
-                                <span class="badge badge-danger rounded-pill"></span>
-                            </div>
-                            <strong class="label ">  الاسم :</strong>
-                            <hr>
-                            <strong class="label ">  البريد الالكتروني  :</strong>
-                        </div>
-                    </div> --}}
-                    {{-- @foreach ($stories as $story) --}}
-                        <div class="card-text row">
-                            @for ($i = 1; $i <= 3; $i++)
-                                <div class="col-4">
-                                    <div class="text-center">
-                                        <strong class="label">الكاتب {{$story["w{$i}_number"]  }}:</strong>
-                                        <span class="badge badge-danger rounded-pill"></span>
-                                    </div>
-                                    <strong class="label">الاسم:</strong>
-                                    <p>{{ $story["w{$i}_name"]  }}</p>
-                                    <hr>
-                                    <strong class="label">البريد الإلكتروني:</strong>
-                                    <p>{{ $story["w{$i}_email"]  }}</p>
+                                    <span class="very_suf">راضي جدا</span>
+                                    <input type="radio" name="facilities" value="verySatified" />
                                 </div>
-                            @endfor
-                        </div>
-                    {{-- @endforeach --}}
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/suf.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="suf">راضي </span>
+                                    <input type="radio" name="facilities" value="satified" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/mid.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="mid">محايد </span>
+                                    <input type="radio" name="facilities" value="neutral" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/sad.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="sad"> مستاء</span>
+                                    <input type="radio" name="facilities" value="upset" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/very_sad.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="very_sad"> مستاء جدا</span>
+                                    <input type="radio" name="facilities" value="veryUpset" />
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>ما مدى رضاك عن تنظيم الفعالية ؟ </span>
+                            <div class="imgs-container">
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/very_suf.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="very_suf">راضي جدا</span>
+                                    <input type="radio" name="organization" value="verySatified" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/suf.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="suf">راضي </span>
+                                    <input type="radio" name="organization" value="satified" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/mid.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="mid">محايد </span>
+                                    <input type="radio" name="organization" value="neutral" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/sad.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="sad"> مستاء</span>
+                                    <input type="radio" name="organization" value="upset" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/very_sad.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="very_sad"> مستاء جدا</span>
+                                    <input type="radio" name="organization" value="veryUpset" />
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>ما مدى رضاك عن الفعاليات المقامة ؟ </span>
+                            <div class="imgs-container">
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/very_suf.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="very_suf">راضي جدا</span>
+                                    <input type="radio" name="events" value="verySatified" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/suf.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="suf">راضي </span>
+                                    <input type="radio" name="events" value="satified" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/mid.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="mid">محايد </span>
+                                    <input type="radio" name="events" value="neutral" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/sad.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="sad"> مستاء</span>
+                                    <input type="radio" name="events" value="upset" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/very_sad.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="very_sad"> مستاء جدا</span>
+                                    <input type="radio" name="events" value="veryUpset" />
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>ما مدى رضاك عن سهولة الوصول للمهرجان ؟</span>
+                            <div class="imgs-container">
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/very_suf.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="very_suf">راضي جدا</span>
+                                    <input type="radio" name="access" value="verySatified" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/suf.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="suf">راضي </span>
+                                    <input type="radio" name="access" value="satified" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/mid.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="mid">محايد </span>
+                                    <input type="radio" name="access" value="neutral" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/sad.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="sad"> مستاء</span>
+                                    <input type="radio" name="access" value="upset" />
+                                </div>
+                                <div class="img-container">
+                                    <img src="{{ asset('website/imges/rating/very_sad.svg') }}" alt=""  style="width: 30px;" />
+                                    <span class="very_sad"> مستاء جدا</span>
+                                    <input type="radio" name="access" value="veryUpset" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-
     </div>
-
-
-    {{-- //// --}}
-    </div>
-    </div>
-@endsection
-@section('js')
-
-@endsection
+</div>

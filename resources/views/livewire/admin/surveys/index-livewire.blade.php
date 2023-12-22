@@ -29,21 +29,24 @@
                 </thead>
 
                 <tbody class="text-center">
-                    @forelse ($surveys as $story)
-                    <tr id="row_{{$story->id}}">
+                    @forelse ($surveys as $survey)
+                    <tr id="row_{{$survey->id}}">
                         <td>{{$loop->iteration}}</td>
                         <td>
-                            {{ $story->name }}
+                            {{ $survey->name }}
                         </td>
                         <td>
-                            {{ $story->email }}
+                            {{ $survey->email }}
                         </td>
                         <td>
-                            {{ $story->phone }}
+                            {{ $survey->phone }}
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-primary">
-                                <i class="fa fa-eye"></i>
+
+                            <a href="javascript:;" data-bs-target="#editsurvey{{$survey->id}}" data-bs-toggle="modal" class="btn btn-sm btn-info"
+                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-original-title="عرض التقييمات">
+                                 <i class="fa fa-eye"></i>
                             </a>
                             <button wire:click="#" class="btn btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
@@ -61,6 +64,9 @@
             </table>
         </div>
     </div>
+    @foreach($surveys as $survey)
+        @include('dashboard.surveys.show')
+    @endforeach
     <div class="text-center p-2">
         {{ $surveys->links('dashboard.layouts.pagination') }}
     </div>
