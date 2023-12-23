@@ -50,7 +50,7 @@
                         <div class="card-text">
                             <strong class="label">المحتوى:</strong>
                             {{ $story->content }}
-                            <a href="#" class="card-link" onclick="toggleDescription()">عرض المزيد</a>
+                            <a href="#" class="card-link" onclick="toggleDescription()"></a>
                         </div>
                     </div>
 
