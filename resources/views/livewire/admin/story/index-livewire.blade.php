@@ -15,6 +15,15 @@
         @endif
     </div>
 
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ session('success') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
 
 
 
@@ -22,13 +31,38 @@
     <div class="row">
 
         <div class="row">
-            <div class="p-3">
-                <button type="button" class="btn btn-outline-primary float-end" data-bs-toggle="modal"
-                    data-bs-target="#storyModal"><i class="fas fa-plus "></i>
-                    اضافة اقصوصة
-                </button>
-                {{-- <input type="search" wire:model="search" class="form-control float-end mx-2"
-                    placeholder="Search...Name" style="width: 300px" /> --}}
+            <div class="col-xl-6 col-lg-6 col-md-6 col-xm-6">
+                <div class="p-3">
+                    <button type="button" class="btn btn-outline-primary float-end" data-bs-toggle="modal"
+                        data-bs-target="#storyModal"><i class="fas fa-plus "></i>
+                        اضافة اقصوصة
+                    </button>
+                    {{-- <input type="search" wire:model="search" class="form-control float-end mx-2"
+                        placeholder="Search...Name" style="width: 300px" /> --}}
+                </div>
+
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-xm-6">
+                <div class="card overflow-hidden sales-card bg-primary-gradient">
+                    <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+                        <div class="">
+                            <h6 class="mb-3 tx-12 text-white">عدد الأقصوصات </h6>
+                        </div>
+                        <div class="pb-0 mt-0">
+                            <div class="d-flex">
+                                <div class="">
+                                    <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ \App\Models\Story::count() }}</h4>
+                                    {{-- <p class="mb-0 tx-12 text-white op-7">Compared to last week</p> --}}
+                                </div>
+                                <span class="float-right my-auto mr-auto">
+                                    <i class="fas fa-arrow-circle-up text-white"></i>
+                                    {{-- <span class="text-white op-7"> +427</span> --}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -69,14 +103,18 @@
 
 
 
-                            <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal"
+                            {{-- <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal"
                                 data-bs-target="#updateStoryModal" wire:click="editStory({{ $story->id }})">
                                 <i class="las la-pen"></i>
-                            </a>
+                            </a> --}}
 
-                            <a href="" data-bs-toggle="modal" data-bs-target="#deleteStoryModal"  wire:click="getDeleteStory({{ $story->id }})">
+                            {{-- <a href="" data-bs-toggle="modal" data-bs-target="#deleteStoryModal"  wire:click="getDeleteStory({{ $story->id }})">
                                 <span class="icon col-4 text-center hover   text-danger"><i
                                         class="fas fa-trash-alt fa-lg"></i></span>
+                            </a> --}}
+
+                            <a href="{{ route('admin.dashboard.send-email-form',$story) }}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-envelope"></i> إرسال
                             </a>
                         </div>
                     </div>

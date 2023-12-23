@@ -46,6 +46,9 @@ Route::group(  ['prefix' => 'admin/dashboard','as'=>'admin.dashboard.','middlewa
     Route::get('show-story/{id}',[ShowStoryController::class,'index'])->name('show-story');
     // dowload story pdf
     Route::get('/download-pdf/{id}', [ShowStoryController::class, 'downloadPDF'])->name('story-download-pdf');
+
+    Route::get('/send-email/{story}', [ShowStoryController::class ,'showSendEmailForm'] )->name('send-email-form');
+    Route::post('/send-email/{story}', [ShowStoryController::class ,'sendEmail'])->name('send-email');
 ##################### أدباء عبر التاريخ#############ShowHistoricalwriterController###########
     Route::get('/HistoricalWriter', function () {
         return view('dashboard.HistoricalWriter.index');
