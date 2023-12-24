@@ -89,7 +89,7 @@
             document.querySelector('.questions-container').classList.remove('d-none');
             document.querySelector('.button-form').classList.remove('d-none');
             document.querySelector('.nextButton').classList.remove('d-none');
-            
+
         }
     </script>
 </body>

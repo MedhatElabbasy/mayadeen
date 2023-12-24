@@ -80,7 +80,7 @@ Route::group(  ['prefix' => 'supervisor','as'=>'supervisor.','middleware' => ['a
     Route::resource('story', StoryController::class)->only(['index', 'store']);
 
     Route::get('story/thank-you', function () {
-        return view('website.survey.success');
+        return view('website.story.success');
     })->name('story.thank-you');
 });
 

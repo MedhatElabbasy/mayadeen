@@ -35,7 +35,17 @@
 <body>
     <div class="success-container">
         <div class="success-icon">&#10004;</div>
-        <div class="success-message">Success! Your action was completed successfully.</div>
+        <div class="success-message">تم ارسال الاقصوصة الي البريد الالكتروني لكل من
+            <br>
+            {{ auth()->user()->name }}
+            <br>
+            {{ session('w1_name') }}
+            <br>
+            {{ session('w2_name') }}
+            <br>
+            {{ session('w3_name') }}
+
+        </div>
     </div>
 </body>
 
